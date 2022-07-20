@@ -9,7 +9,8 @@
  **
  ** How to use?
  ** In order to trigger this analysis you must setup a Dashboard.
- ** Create a Widget "Form" and enter the variable 'push_payload' for the device you want to push with the MQTT.
+ ** Create a Widget "Form" and enter the variable 'push_payload'
+ ** for the device you want to push with the MQTT.
  ** In User Control, select this Analysis in the Analysis Option.
  ** Save and use the form.
  */
@@ -32,9 +33,11 @@ async function mqttPushExample(context, scope) {
   // Example:
   // const myDataObject = 'This is a string';
   const myDataObject = {
-    variable: "temperature_celsius",
-    value: (myData.value - 32) * (5 / 9),
-    unit: "C",
+    device: "F80332010002B39D",
+    port: "16",
+    command: "00060100",
+    confirmed: false,
+    class_c: false,
   };
 
   // Create a object with the options you chooses
@@ -48,7 +51,7 @@ async function mqttPushExample(context, scope) {
   MQTT.publish({
     bucket: myData.bucket,
     message: JSON.stringify(myDataObject),
-    topic: "tago/my_topic",
+    topic: "itg200/F80332029D3A0000/downlink",
     options,
   }).then(context.log, context.log);
 }
